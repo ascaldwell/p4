@@ -1,0 +1,41 @@
+1	#A sample MAL program.
+2	              .data                        #Data segment begins here.
+3	avg:          .word                        #Will store the average. 
+4	i1:           .word       20               #First integer. 
+5	i2:           .word       13               #Second integer. 
+6	i3:           .word       82               #Third integer. 
+7	prompt:       .asciiz     "Value is: "
+8	nl:           .byte       '\n'
+
+9	              .text                        #Text segment begins here.
+10	__start:      lw          $15,i1           #$15 contains 20.
+11	              lw          $16,i2           #$16 contains 13.
+12	i10:          add         $15,$15,$16      #Operand field has no ids.
+13	              lw          $16,i3           #$16 contains 82.
+14	              add         $15,$15,$16      #$15 contains the sum (115).
+15	              li          $16,3            #$16 contains 3.
+16	              div         $15,$15,$16      #$15 contains the average (38).
+17	i20:          sw          $15,avg          #Store the average.
+18	              puts        prompt
+19	              put         avg
+20	              putc        nl
+
+21	              sw          $15,avg         
+22	              la          $16,i1
+23	              sw          $15,0($16)
+24	              add         i3,i3,1         
+25	              done                         #Similar to halt.
+
+Cross Reference Table
+
+Identifier	Definition	Use
+
+avg		3		17 19 21 
+i1		4		10 22 
+i2		5		11 
+i3		6		13 24 
+prompt		7		18 
+nl		8		20 
+__start		10		
+i10		12		
+i20		17		
